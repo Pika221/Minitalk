@@ -15,7 +15,7 @@ void	handler(int signal, siginfo_t *info, void *context)
 	i++;
 	if (i == 8)
 	{
-		printf("%c", c);
+		ft_printf("%c", c);
 		i = 0;
 		c = 0;
 	}
@@ -30,7 +30,7 @@ int main(void)
 	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
-	printf("Server PID: %d\n", getpid());
+	ft_printf("Server PID: %d\n", getpid());
 	while (1)
 		pause();
 }

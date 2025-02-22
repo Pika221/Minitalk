@@ -49,14 +49,13 @@ void	send_char(int pid, char c)
 			pause();
 	}
 }
-
 int main(int ac, char **av)
 {
 	int		pid;
 	int		i;
 
 	if (ac != 3)
-		return(printf("Please enter valid arguments.\n"), 1);
+		return(ft_printf("Please enter valid arguments.\n"), 1);
 	i = 0;
 	pid = ft_atoi(av[1]);
 	signal(SIGUSR1, signal_handler);
@@ -65,6 +64,6 @@ int main(int ac, char **av)
 		send_char(pid, av[2][i]);
 		i++;
 		if (av[2][i] == '\0')
-			printf("Message received!\n");
+			ft_printf("Message received!\n");
 	}
 }

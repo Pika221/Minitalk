@@ -15,7 +15,7 @@ void	handler(int signal, siginfo_t *info, void *context)
 	i++;
 	if (i == 8)
 	{
-		printf("%c", c);
+		ft_printf("%c", c);
 		i = 0;
 		c = 0;
 	}
