@@ -1,10 +1,9 @@
-#include "minitalk.h"
-
-int	i;
+#include "minitalk_bonus.h"
 
 void	handler(int signal, siginfo_t *info, void *context)
 {
 	static char	c;
+	static int	i;
 
 	(void)context;
 	c = c << 1;
@@ -24,8 +23,7 @@ void	handler(int signal, siginfo_t *info, void *context)
 int main(void)
 {
 	struct sigaction sa;
-	
-	i = 0;
+
 	sa.sa_sigaction = handler;
 	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sa, NULL);

@@ -1,4 +1,4 @@
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 int	ft_atoi(const char *str)
 {
@@ -24,6 +24,16 @@ int	ft_atoi(const char *str)
 	}
 	return (result * sign);
 }
+int	digit(char *str)
+{
+	while (*str)
+	{
+		if (*str > '9' || *str < '0')
+			return (0);
+		str++;
+	}
+	return (1);
+}
 
 int	received;
 
@@ -33,37 +43,39 @@ void	signal_handler(int signal)
 		received = 1;
 }
 
-void	send_char(int pid, char c)
+void	send_string(int pid, char *str)
 {
 	int	i;
 
 	i = 8;
-	while (i--)
+	while (*str)
 	{
-		received = 0;
-		if ((c >> i & 1 ) == 1)
-			kill(pid, SIGUSR1);
-		else
-			kill(pid, SIGUSR2);
-		if (!received);
-			pause();
+		while (i--)
+		{
+			received = 0;
+			if ((*str) >> i & 1)
+				kill(pid, SIGUSR1);
+			else
+				kill(pid, SIGUSR2);
+			if (!received)
+				pause();
+		}
+		str++;
+		i = 8;
 	}
 }
+
 int main(int ac, char **av)
 {
 	int		pid;
-	int		i;
 
 	if (ac != 3)
-		return(ft_printf("Please enter valid arguments.\n"), 1);
-	i = 0;
+		return(ft_printf("Invalid number of arguments.\n"), 1);
+	if (!digit(av[1]))
+		return(ft_printf("Wrong PID format.\n"), 1);
 	pid = ft_atoi(av[1]);
 	signal(SIGUSR1, signal_handler);
-	while (av[2][i])
-	{
-		send_char(pid, av[2][i]);
-		i++;
-		if (av[2][i] == '\0')
-			ft_printf("Message received!\n");
-	}
+	send_string(pid, av[2]);
+	ft_printf("Message received!\n");
+	return (0);
 }
