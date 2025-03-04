@@ -8,9 +8,7 @@ void	handler(int signal, siginfo_t *info, void *context)
 	(void)context;
 	c = c << 1;
 	if (signal == SIGUSR1)
-    	c = c | 1;
-	else if (signal == SIGUSR2)
-    	c = c | 0;
+		c = c | 1;
 	i++;
 	if (i == 8)
 	{
@@ -20,9 +18,10 @@ void	handler(int signal, siginfo_t *info, void *context)
 	}
 	kill(info->si_pid, SIGUSR1);
 }
-int main(void)
+
+int	main(void)
 {
-	struct sigaction sa;
+	struct sigaction	sa;
 
 	sa.sa_sigaction = handler;
 	sa.sa_flags = SA_SIGINFO;

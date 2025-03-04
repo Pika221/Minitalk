@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   func.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hialpagu <hialpagu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <hialpagu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:35:22 by hialpagu          #+#    #+#             */
-/*   Updated: 2024/12/17 16:25:51 by hialpagu         ###   ########.fr       */
+/*   Updated: 2025/03/01 15:53:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	print_ptr(unsigned long p)
 		return (print_str("(nil)"));
 	count += write (1, "0x", 2);
 	while (p > 0)
-	{	
+	{
 		value[i] = hex[p % 16];
 		p /= 16;
 		i++;
